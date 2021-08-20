@@ -15,6 +15,7 @@ let currentPopCount = 0
 let gameLength = 5000
 let clockId = 0
 let timeRemaining = 0
+let currentPlayer = {}
 
 
 function startGame() {
@@ -26,6 +27,7 @@ function startGame() {
 }
 
 function startClock() {
+    countdown.classList.remove("hidden")
     timeRemaining = gameLength
     drawClock()
     clockId = setInterval(drawClock, 1000)
@@ -66,7 +68,7 @@ function draw() {
     
     clickCountElem.innerText = clickCount.toString()
     PopCountElem.innerText = currentPopCount.toString()
-    highPopCountElem.innerText = highestPopCount.toString()
+    highPopCountElem.innerText = currentPlayer.topScore.toString()
 }
 
 function stopGame() {
@@ -79,15 +81,59 @@ function stopGame() {
     height = 120
     width = 100
 
-    if (currentPopCount > highestPopCount) {
-        highestPopCount = currentPopCount
+    if (currentPopCount > currentPlayer.topScore) {
+        currentPlayer.topScore = currentPopCount
+        savePlayers()
     }
+
     currentPopCount = 0
     
     stopClock()
     draw()
+    countdown.classList.add("hidden")
 }
 // #endregion
 
 let players = []
+loadPlayers()
 
+function setPlayer(event) {
+    event.preventDefault()
+    let form = event.target
+
+    let playerName = form.playerName.value
+
+    currentPlayer = players.find(player => player.name == playerName)
+
+    if(!currentPlayer) {
+        currentPlayer = {name: playerName, topScore: 0}
+        players.push(currentPlayer)
+        savePlayers()
+    }
+
+    
+    form.reset()
+    document.getElementById("game").classList.remove("hidden")
+    form.classList.add("hidden")
+    draw()
+    console.log(currentPlayer)
+    console.log(players)
+}
+
+function changePlayer() {
+    // stopGame() Clock keeps running if you change players
+    // stopClock()
+    document.getElementById("player-form").classList.remove("hidden")
+    document.getElementById("game").classList.add("hidden")
+}
+
+function savePlayers() {
+    window.localStorage.setItem("players", JSON.stringify(players))
+}
+
+function loadPlayers() {
+    let playersData = JSON.parse(window.localStorage.getItem("players"))
+    if(playersData) {
+        players = playersData
+    }
+}

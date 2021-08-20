@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,33 +7,50 @@
     <title>Balloon Pop</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div>
-        <button id="start-button" onclick="startGame()">START GAME</button>
-    </div>
+    <form id="player-form" onsubmit="setPlayer(event)">
+        <div>
+            <label for="name">Player Name:</label>
+            <input type="text" name="playerName" required>
+        </div>
+        <button type="submit">Okay</button>
+    </form>
+    <section id="game" class="game hidden">
 
-    <button id="inflate-button" onclick="inflate()" disabled="true">Inflate
-        
-        <span id="click-count"></span>
-        
-    </button>
-    <div>
-        <span>Balloons Popped:</span>
-        <span id="pop-count">0</span>
-    </div>
+        <div>
+            <button onclick="changePlayer()">
+                Change Player
+            </button>
+        </div>
 
-    <div>
-        <span>High Score:</span>
-        <span id="high-pop-count">0</span>
-    </div>
+        <div>
+            <button id="start-button" onclick="startGame()">START GAME</button>
+        </div>
 
-    <div>
-        <span>Time Remaining:</span>
-        <span id="countdown">0</span>
-    </div>
-    <div id="balloon" class="balloon"></div>
+        <button id="inflate-button" onclick="inflate()" disabled="true">Inflate
 
+            <span id="click-count"></span>
+        </button>
+
+        <div>
+            <span>Balloons Popped:</span>
+            <span id="pop-count">0</span>
+        </div>
+
+        <div>
+            <span>High Score:</span>
+            <span id="high-pop-count">0</span>
+        </div>
+
+        <div>
+            <span>Time Remaining:</span>
+            <span id="countdown">0</span>
+        </div>
+        <div id="balloon" class="balloon"></div>
+    </section>
     <script src="main.js" defer></script>
 </body>
+
 </html>
