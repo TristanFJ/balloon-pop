@@ -10,7 +10,14 @@
 
 <body>
 
-    <form id="player-form" onsubmit="setPlayer(event)">
+    <header>
+    <!-- not sure where to get logo -->
+        <div class="logo-container">
+            <img src="balloon-pop-logo.png" alt="">
+        </div>
+    </header>
+
+    <form class="card" id="player-form" onsubmit="setPlayer(event)">
         <div>
             <label for="name">Player Name:</label>
             <input type="text" name="playerName" required>

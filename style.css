@@ -1,5 +1,25 @@
+:root {
+    --primary: #f393fd;
+    --bg: rgb(224,217,217);
+    --shadow: rgba(0,0,0,.3);
+}
+
 body {
-    background-color: wheat;
+    background-color: var(--bg);
+}
+
+header {
+    margin: 3em 0;
+}
+
+.logo-container {
+    width: 50%;
+    margin: auto;
+    filter: drop-shadow(2px, 0, 8px, var(--shadow));
+}
+
+img {
+    max-width: 100%;
 }
 
 .balloon {
@@ -9,6 +29,12 @@ body {
     border-radius: 50%;
 }
 
+.card {
+    background-color: white;
+    padding: 1em;
+    box-shadow: 2px 0 8px var(--shadow);
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }
