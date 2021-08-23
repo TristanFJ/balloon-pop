@@ -1,25 +1,69 @@
 :root {
     --primary: #f393fd;
+    --primary-darken: #af2cbc;
     --bg: rgb(224,217,217);
-    --shadow: rgba(0,0,0,.3);
+    --shadow: 2px, 0, 8px, rgba(0,0,0,.3);
+    --corners: 70px;
+    --text-color: rgb(20,20,20);
+    --light: rgba(253, 253, 253, 0.666);
 }
 
 body {
     background-color: var(--bg);
+    font-family: 'Permanent Marker', cursive;
+    font-size: 16pt;
+    color: var(--text-color);
+    text-align: center;
 }
 
 header {
     margin: 3em 0;
 }
 
-.logo-container {
-    width: 50%;
-    margin: auto;
-    filter: drop-shadow(2px, 0, 8px, var(--shadow));
-}
-
 img {
     max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    margin: 3rem 0;
+}
+
+div {
+    margin: .1rem .1rem .1rem;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--primary);
+    outline: none;
+    font-size: 14pt;
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--text-color);
+    border: 1px solid var(--primary-darken);
+    border-radius: var(--corners);
+    box-shadow: var(--shadow);
+    font-family: 'Permanent Marker', cursive;
+    padding: 1rem 1rem 1rem 1rem;
+    text-transform: uppercase;
+    width: fit-content;
+    transition: all .1s ease;
+    cursor: pointer;
+    font-size: 14pt;
+}
+
+button:hover {
+    background-color: var(--primary-darken);
+}
+
+button:active {
+    background-color: var(--primary);
 }
 
 .balloon {
@@ -27,12 +71,47 @@ img {
     width: 100px;
     background-color: blue;
     border-radius: 50%;
+    transition: all .1s ease;
+    margin: 0 auto;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    float: none;
 }
 
 .card {
-    background-color: white;
+    background-color: var(--light);
     padding: 1em;
     box-shadow: 2px 0 8px var(--shadow);
+    border-radius: var(--corners);
+}
+
+.bg-dark {
+    background-color: var(--text-color);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.title {
+    color: var(--primary);
+    text-decoration: underline;
+    text-align: center;
+}
+
+.shadow {
+    filter: drop-shadow(var(--shadow));
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-flex.space-between {
+    justify-content: space-between;
 }
 
 .hidden {

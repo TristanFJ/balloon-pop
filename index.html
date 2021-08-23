@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balloon Pop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,51 +16,65 @@
 
     <header>
     <!-- not sure where to get logo -->
-        <div class="logo-container">
-            <img src="balloon-pop-logo.png" alt="">
+        <div class="container shadow" id="balloon-circle">
+            <img src="balloon.webp" alt="" height=150px>
+            <h1 class="title">Balloon Pop</h1>
         </div>
     </header>
 
-    <form class="card" id="player-form" onsubmit="setPlayer(event)">
+<main class="container card">
+
+    <form class="d-flex space-between" id="player-form" onsubmit="setPlayer(event)">
         <div>
-            <label for="name">Player Name:</label>
+            <label for="name">
+                <!-- NOT WORKING --> <!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
+                <span>Player Name:</span>
+            </label>
             <input type="text" name="playerName" required>
         </div>
         <button type="submit">Okay</button>
     </form>
-    <section id="game" class="game hidden">
+    <section id="game" class="game "> 
+        <!-- TODO replace hidden class above in #game-->
 
+        <div class="card bg-dark text-light">
+            <span>Current Player:</span>
+            <span id="current-player"></span>
+            <div>
+                <span>High Score:</span>
+                <span id="high-pop-count">0</span>
+            </div>
+        </div>
+        
         <div>
             <button onclick="changePlayer()">
                 Change Player
             </button>
         </div>
-
+        
         <div>
             <button id="start-button" onclick="startGame()">START GAME</button>
         </div>
-
-        <button id="inflate-button" onclick="inflate()" disabled="true">Inflate
-
+        
+        <button id="inflate-button" onclick="inflate()" disabled="true">Inflate:
+            
             <span id="click-count"></span>
         </button>
+
 
         <div>
             <span>Balloons Popped:</span>
             <span id="pop-count">0</span>
         </div>
-
-        <div>
-            <span>High Score:</span>
-            <span id="high-pop-count">0</span>
-        </div>
-
+        
+        
         <div>
             <span>Time Remaining:</span>
             <span id="countdown">0</span>
         </div>
         <div id="balloon" class="balloon"></div>
     </section>
+</main>
     <script src="main.js" defer></script>
 </body>
 

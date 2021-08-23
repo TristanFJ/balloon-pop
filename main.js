@@ -62,30 +62,30 @@ function draw() {
     let balloonElement = document.getElementById("balloon")
     let PopCountElem = document.getElementById("pop-count")
     let highPopCountElem = document.getElementById("high-pop-count")
-
+    
     balloonElement.style.height = height + "px"
     balloonElement.style.width = width + "px"
     
-    clickCountElem.innerText = clickCount.toString()
     PopCountElem.innerText = currentPopCount.toString()
     highPopCountElem.innerText = currentPlayer.topScore.toString()
+    clickCountElem.innerText = clickCount.toString()
 }
 
 function stopGame() {
     console.log("GAME OVER")
-
+    
     inflateButton.setAttribute('disabled', "true")
     startButton.removeAttribute('disabled')
     
     clickCount = 0
     height = 120
     width = 100
-
+    
     if (currentPopCount > currentPlayer.topScore) {
         currentPlayer.topScore = currentPopCount
         savePlayers()
     }
-
+    
     currentPopCount = 0
     
     stopClock()
@@ -100,9 +100,9 @@ loadPlayers()
 function setPlayer(event) {
     event.preventDefault()
     let form = event.target
-
+    
     let playerName = form.playerName.value
-
+    
     currentPlayer = players.find(player => player.name == playerName)
 
     if(!currentPlayer) {
@@ -110,14 +110,15 @@ function setPlayer(event) {
         players.push(currentPlayer)
         savePlayers()
     }
-
+    
     
     form.reset()
     document.getElementById("game").classList.remove("hidden")
     form.classList.add("hidden")
+    document.getElementById("balloon-circle").classList.add("hidden")
     draw()
-    console.log(currentPlayer)
-    console.log(players)
+    let currentPlayerElem = document.getElementById("current-player")
+    currentPlayerElem.innerText = currentPlayer.name
 }
 
 function changePlayer() {
@@ -125,6 +126,7 @@ function changePlayer() {
     // stopClock()
     document.getElementById("player-form").classList.remove("hidden")
     document.getElementById("game").classList.add("hidden")
+    document.getElementById("balloon-circle").classList.remove("hidden")
 }
 
 function savePlayers() {
