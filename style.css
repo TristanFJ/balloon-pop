@@ -3,9 +3,11 @@
     --primary-darken: #af2cbc;
     --bg: rgb(224,217,217);
     --shadow: 2px, 0, 8px, rgba(0,0,0,.3);
-    --corners: 70px;
+    --corners: 10px;
     --text-color: rgb(20,20,20);
     --light: rgba(253, 253, 253, 0.666);
+    --dark-lighten: #504c4c;
+    --dark: #3a3838;
 }
 
 body {
@@ -50,7 +52,7 @@ button {
     border-radius: var(--corners);
     box-shadow: var(--shadow);
     font-family: 'Permanent Marker', cursive;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1em;
     text-transform: uppercase;
     width: fit-content;
     transition: all .1s ease;
@@ -66,6 +68,62 @@ button:active {
     background-color: var(--primary);
 }
 
+.game-container {
+    height: 300px;
+}
+
+.pump {
+    margin-top: 80px;
+    height: 130px;
+    width: 180px;
+    position: relative;
+    align-self: flex-end;
+}
+
+.handle {
+    height: 10px;
+    width: 80px;
+    background-color: var(--dark-lighten);
+    position: absolute;
+    top: -80px;
+    left: 50px;
+    display: flex;
+    justify-content: center;
+    transition: all .05s linear;
+    z-index: 1;
+}
+
+.handle::before {
+    content: " ";
+    background-color: var(--dark-lighten);
+    width: 10px;
+    height: 80px;
+    display: block;
+}
+
+.pump:active .handle {
+    top: -20px;
+}
+
+.pump-box {
+    background-color: var(--primary);
+    height: 130px;
+    width: 180px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.pump-box span {
+    background-color: antiquewhite;
+    padding: .5em;
+}
+
 .balloon {
     height: 120px;
     width: 100px;
@@ -73,12 +131,48 @@ button:active {
     border-radius: 50%;
     transition: all .1s ease;
     margin: 0 auto;
+    animation: balloon-float 5s ease-in-out infinite;
+    align-self: flex-end;
+    margin: 0 auto;
+    box-shadow: inset -10px -10px 12px rgba(0,0,0,.3);
+    background: linear-gradient(-45deg, #430101 0%, #fa1e01 60%, #ff0000 80%, #ffffff 100%); 
+}
+
+.balloon.green {
+    filter: hue-rotate(130deg);
+}
+
+.balloon.blue {
+    filter: hue-rotate(225deg);
+}
+
+.balloon.pruple {
+    filter: hue-rotate(130deg);
+}
+
+.balloon.pink {
+    filter: hue-rotate(325deg);
+}
+
+@keyframes balloon-float {
+    0%,100% {
+        transform: translateY(-25px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0px) rotate(-5deg);
+    }
 }
 
 .container {
     width: 50%;
     margin: auto;
     float: none;
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        width: 80%;
+    }
 }
 
 .card {
@@ -90,6 +184,16 @@ button:active {
 
 .bg-dark {
     background-color: var(--text-color);
+}
+
+.btn-dark {
+    background-color: var(--dark-lighten);
+    border-color: var(--dark);
+}
+
+.btn-dark:hover {
+    background-color: var(--dark);
+    border-color: var(--dark-lighten);
 }
 
 .text-light {
@@ -108,12 +212,44 @@ button:active {
 
 .d-flex {
     display: flex;
+    align-items: center;
 }
+
+
 
 .d-flex.space-between {
     justify-content: space-between;
 }
 
+.d-flex.space-around {
+    justify-content: space-around;
+}
+
+.mt-1 {
+    margin-top: .5em;
+}
+
+.mt-2 {
+    margin-top: 1em;
+}
+
+.mt-3 {
+    margin-top: 1.5em;;
+}
+
+.mb-1 {
+    margin-bottom: .5em;
+}
+
+.mb-2 {
+    margin-bottom: 1em;
+}
+
+.mb-3 {
+    margin-bottom: 1.5em;
+}
+
 .hidden {
     display: none !important;
 }
+

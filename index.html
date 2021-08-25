@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="icon" href="balloon.jpg">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,60 +22,74 @@
             <h1 class="title">Balloon Pop</h1>
         </div>
     </header>
-
-<main class="container card">
-
-    <form class="d-flex space-between" id="player-form" onsubmit="setPlayer(event)">
-        <div>
-            <label for="name">
-                <!-- NOT WORKING --> <!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
-                <span>Player Name:</span>
-            </label>
-            <input type="text" name="playerName" required>
-        </div>
-        <button type="submit">Okay</button>
-    </form>
-    <section id="game" class="game "> 
-        <!-- TODO replace hidden class above in #game-->
-
-        <div class="card bg-dark text-light">
-            <span>Current Player:</span>
-            <span id="current-player"></span>
+    
+    <main class="container card">
+        
+        <form class="d-flex space-between" id="player-form" onsubmit="setPlayer(event)">
             <div>
-                <span>High Score:</span>
-                <span id="high-pop-count">0</span>
+                <label for="name">
+                    <span>Player Name:</span>
+                </label>
+                <input type="text" name="playerName" required>
             </div>
-        </div>
+            <button type="submit">Okay</button>
+        </form>
         
-        <div>
-            <button onclick="changePlayer()">
-                Change Player
-            </button>
-        </div>
         
-        <div>
-            <button id="start-button" onclick="startGame()">START GAME</button>
-        </div>
-        
-        <button id="inflate-button" onclick="inflate()" disabled="true">Inflate:
+        <section id="game" class="game hidden"> 
             
-            <span id="click-count"></span>
-        </button>
-
-
-        <div>
-            <span>Balloons Popped:</span>
-            <span id="pop-count">0</span>
-        </div>
-        
-        
-        <div>
-            <span>Time Remaining:</span>
-            <span id="countdown">0</span>
-        </div>
-        <div id="balloon" class="balloon"></div>
-    </section>
-</main>
+            <div class="card bg-dark text-light">
+                <div class="d-flx space-between">
+                    <div>
+                        <!-- NOT WORKING --> <!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
+                    </div>
+                </div>
+                <span>Current Player:</span>
+                <span id="current-player"></span>
+                <div>
+                    <span>High Score:</span>
+                    <span id="high-pop-count">0</span>
+                </div>
+            </div>
+            
+            <div id="main-controls" class="d-flex space-around mt-2">
+                <button class="btn-dark" onclick="changePlayer()">
+                    Change Player
+                </button>
+                <button id="start-button" onclick="startGame()">START GAME</button>
+            </div>
+            <div id="game-controls" class="hidden">
+                
+                
+                <div>
+                    <span>Balloons Popped:</span>
+                    <span id="pop-count">0</span>
+                </div>
+                
+                
+                <div>
+                    <span>Time Remaining:</span>
+                    <span id="countdown">0</span>
+                </div>
+            </div>
+            
+            <div id="game-container" class="game-container d-flex hidden">
+                <div class="pump" onclick="inflate()">
+                    <div class="handle" ></div>
+                    <div class="pump-box"></div>
+                    <span id="click-count">0</span>
+                </div>
+                <div id="balloon" class="balloon"></div>
+                <!-- <audio id="pop-sound" src="burst.mp3"></audio> Not sure where you've provided this audio file -->
+            </div>
+        </section>
+    </main>
+    
+    <div id="scoreboard" class="container card mt-2">
+        <h3>Scoreboard</h3>
+        <div id="players"></div>
+    
+    </div>
     <script src="main.js" defer></script>
 </body>
 

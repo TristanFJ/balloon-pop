@@ -1,8 +1,3 @@
-// BUTTONS
-let startButton = document.getElementById('start-button')
-let inflateButton = document.getElementById('inflate-button')
-
-//  #region GAME LOGIC AND DATA
 
 // DATA
 let clickCount = 0
@@ -12,16 +7,20 @@ let inflationRate = 20
 let maxSize = 300
 let highestPopCount = 0
 let currentPopCount = 0
-let gameLength = 5000
+let gameLength = 10000
 let clockId = 0
 let timeRemaining = 0
 let currentPlayer = {}
+let currentColor = "red"
+let possibleColors = ["red", "green", "blue", "purple", "pink"]
 
+//  #region GAME LOGIC
 
 function startGame() {
-
-    startButton.setAttribute('disabled', true)
-    inflateButton.removeAttribute('disabled')
+    document.getElementById("game-controls").classList.remove("hidden")
+    document.getElementById("main-controls").classList.add("hidden")
+    document.getElementById("game-container").classList.remove("hidden")
+    document.getElementById("scoreboard").classList.add("hidden")
     startClock()
     setTimeout(stopGame, gameLength)
 }
@@ -47,14 +46,29 @@ function inflate (){
     clickCount++
     height += inflationRate
     width += inflationRate
-    
+    checkBalloonPop()
+draw()
+}
+
+function checkBalloonPop() {
     if(height >= maxSize) {
     console.log("POP")  
+    let balloonElement = document.getElementById("balloon")
+    balloonElement.classList.remove(currentColor)
+    getRandomColor()
+    balloonElement.classList.add(currentColor)
+    // @ts-ignore
+    // document.getElementById("pop-sound").play() Not sure where you've provided the audio file
+
     currentPopCount++
-    height = 0
+    height = 40
     width = 0  
     }
-draw()
+}
+
+function getRandomColor(){
+    let i = Math.floor(Math.random()*possibleColors.length);
+    currentColor = possibleColors[i]
 }
 
 function draw() {
@@ -74,8 +88,11 @@ function draw() {
 function stopGame() {
     console.log("GAME OVER")
     
-    inflateButton.setAttribute('disabled', "true")
-    startButton.removeAttribute('disabled')
+    document.getElementById("main-controls").classList.remove("hidden")
+    document.getElementById("game-controls").classList.add("hidden")
+    document.getElementById("game-container").classList.add("hidden")
+    document.getElementById("scoreboard").classList.remove("hidden")
+
     
     clickCount = 0
     height = 120
@@ -90,6 +107,7 @@ function stopGame() {
     
     stopClock()
     draw()
+    drawScoreboard()
     countdown.classList.add("hidden")
 }
 // #endregion
@@ -117,6 +135,7 @@ function setPlayer(event) {
     form.classList.add("hidden")
     document.getElementById("balloon-circle").classList.add("hidden")
     draw()
+    drawScoreboard()
     let currentPlayerElem = document.getElementById("current-player")
     currentPlayerElem.innerText = currentPlayer.name
 }
@@ -139,3 +158,20 @@ function loadPlayers() {
         players = playersData
     }
 }
+
+function drawScoreboard() {
+    let template = ""
+
+    players.sort((p1, p2) => p2.topScore - p1.topScore)
+    players.forEach(player => {
+        template += `        <div class="d-flex space-between">
+        <span>${player.name}</span>
+        <Span>${player.topScore}</Span>
+    </div>
+`
+    })
+
+    document.getElementById("players").innerHTML = template
+}
+
+drawScoreboard()
